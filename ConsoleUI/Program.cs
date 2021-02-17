@@ -12,10 +12,11 @@ namespace ConsoleUI
         {
             //CarTest();
             //ColorTest();
-            BrandTest();
+            //BrandTest();
 
         }
-
+        
+        
         private static void BrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
@@ -68,7 +69,7 @@ namespace ConsoleUI
             {
                 foreach (var car in result.Data)
                 {
-                    Console.WriteLine(car.DailyPrice + "/" + car.Description);
+                    Console.WriteLine(car.BrandName + "/" +  car.ColorName + "/" + car.DailyPrice + "/" + car.Description );
                 }
             }
             else
@@ -80,6 +81,8 @@ namespace ConsoleUI
             {
                 Console.WriteLine(car.CarId + "/" + car.ColorName);
             }
+
+            
         }
     }
 }

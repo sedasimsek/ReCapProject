@@ -14,5 +14,6 @@ namespace Entitites.DTOs
         public string Description { get; set; }
         public string ModelYear { get; set; }
 
+
     }
 }
