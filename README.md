@@ -1,3 +1,3 @@
 # ReCapProject
 *Rent A Car Platform*
-![Project Image](https://www.pexels.com/tr-tr/fotograf/sari-ford-araba-3992348/)
+![Project Image](A file with the same name already exists. Please choose a different name and try again.)
