@@ -1,3 +1,2 @@
 # Rent A Car Platform
-* Introduction :
-- Project is a car rent platform.
+* Introduction : Project is a car rent platform.
