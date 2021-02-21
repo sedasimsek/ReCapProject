@@ -1,4 +1,4 @@
 # Rent A Car Platform
-![Project Image](https://pixabay.com/tr/illustrations/elini-s%C4%B1kmak-sat%C4%B1n-almak-araba-3677534/)
+![Project Image] (https://cdn.pixabay.com/photo/2018/09/14/16/42/shake-hand-3677534_960_720.jpg)
 **Introduction
 - Project is a car rent platform
