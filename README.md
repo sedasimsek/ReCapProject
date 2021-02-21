@@ -1,3 +1,3 @@
 # ReCapProject
 *Rent A Car Platform*
-![Project Image](A file with the same name already exists. Please choose a different name and try again.)
+![Project Image](https://images.pexels.com/photos/3992348/pexels-photo-3992348.jpeg?cs=srgb&dl=pexels-suleyman-seykan-3992348.jpg&fm=jpg)
