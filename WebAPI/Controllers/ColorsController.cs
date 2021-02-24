@@ -10,19 +10,18 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarsController : ControllerBase
+    public class ColorsController : ControllerBase
     {
-        ICarService _carService;
-
-        public CarsController(ICarService carService)
+        IColorService _colorService;
+        public ColorsController(IColorService colorService)
         {
-            _carService = carService;
+            _colorService = colorService;
         }
-        
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _carService.GetAll();
+            var result = _colorService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -30,10 +29,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("add")] 
-        public IActionResult Add(Car car)
+        [HttpPost("add")]
+        public IActionResult Add(Color color)
         {
-            var result = _carService.Add(car);
+            var result = _colorService.Add(color);
             if (result.Success)
             {
                 return Ok(result);
@@ -41,16 +40,15 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyıd")]
-        public IActionResult GetById(int id)
+        [HttpDelete("getbyıd")]
+        public IActionResult GetById(int colorId)
         {
-            var result = _carService.GetById(id);
+            var result = _colorService.GetById(colorId);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
     }
 }

@@ -8,21 +8,19 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CarsController : ControllerBase
+    public class BrandsController : ControllerBase
     {
-        ICarService _carService;
+        IBrandService _brandService;
 
-        public CarsController(ICarService carService)
+        public BrandsController(IBrandService brandService)
         {
-            _carService = carService;
+            _brandService = brandService;
         }
-        
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _carService.GetAll();
+            var result = _brandService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -30,10 +28,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("add")] 
-        public IActionResult Add(Car car)
+        [HttpPost("add")]
+        public IActionResult Add(Brand brand)
         {
-            var result = _carService.Add(car);
+            var result = _brandService.Add(brand);
             if (result.Success)
             {
                 return Ok(result);
@@ -44,7 +42,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyıd")]
         public IActionResult GetById(int id)
         {
-            var result = _carService.GetById(id);
+            var result = _brandService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -54,3 +52,4 @@ namespace WebAPI.Controllers
 
     }
 }
+
