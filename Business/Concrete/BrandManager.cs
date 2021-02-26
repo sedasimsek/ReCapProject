@@ -16,7 +16,7 @@ namespace Business.Concrete
         public BrandManager(IBrandDal brandDal)
         {
             _brandDal = brandDal;
-        }
+        } 
 
         public IDataResult<List<Brand>> GetAll()
         {
