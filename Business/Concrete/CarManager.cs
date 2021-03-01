@@ -45,9 +45,30 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        public IDataResult<Car> Get(int carId)
+        {
+            Car car = _carDal.Get(p => p.CarId == carId);
+            if (car == null)
+            {
+                return new ErrorDataResult<Car>();
+            }
+            else
+            {
+                return new SuccessDataResult<Car>(car);
+            }
+        }
+
         public IDataResult<List<Car>> GetAll()
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
+            List<Car> cars = _carDal.GetAll();
+            if (cars.Count == 0)
+            {
+                return new ErrorDataResult<List<Car>>();
+            }
+            else
+            {
+                return new SuccessDataResult<List<Car>>(cars);
+            }
         }
 
         public IDataResult<Car> GetById(int carId)

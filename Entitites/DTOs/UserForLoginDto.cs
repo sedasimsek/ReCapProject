@@ -3,13 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entitites.Concrete
+namespace Entitites.DTOs
 {
-    public class User : IEntity
+    public class UserForLoginDto : IDto
     {
-        public int UserId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }

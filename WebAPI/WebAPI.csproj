@@ -5,10 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Images\**" />
+    <Content Remove="Controllers\Images\**" />
+    <EmbeddedResource Remove="Controllers\Images\**" />
+    <None Remove="Controllers\Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Entitites\Entitites.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.12" />
   </ItemGroup>
 
 
