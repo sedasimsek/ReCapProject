@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <None Include="wwwroot\uploads\logo.jpg" />
   </ItemGroup>
 
   <ItemGroup>

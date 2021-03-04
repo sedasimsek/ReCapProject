@@ -2,13 +2,10 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Validation;
-using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entitites.Concrete;
 using Entitites.DTOs;
-using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -19,14 +16,13 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-        ICarImageService _carImageService;
 
-        public CarManager(ICarDal carDal, ICarImageService carImageService)
+        public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
-            _carImageService = carImageService;
         }
 
+        //[SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -34,17 +30,18 @@ namespace Business.Concrete
             //validation 
 
             _carDal.Add(car);
-
             return new SuccessResult(Messages.CarAdded);
 
         }
 
+        //[SecuredOperation("car.delete,admin")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        
         public IDataResult<Car> Get(int carId)
         {
             Car car = _carDal.Get(p => p.CarId == carId);
@@ -81,6 +78,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(filter));
         }
 
+        //[SecuredOperation("car.update,admin")]
         public IResult Update(Car car)
         {
             if (car.DailyPrice > 0)
