@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Entitites.DTOs;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Entitites
+namespace Core.Entities
 {
     public class CoreModule : ICoreModule
     {

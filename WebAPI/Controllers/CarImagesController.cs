@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Entitites.Concrete;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -33,10 +33,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete([FromForm(Name = ("ImageId"))] int ImageId)
+        public IActionResult Delete([FromForm(Name = ("CarImageId"))] int carImageId)
         {
 
-            var carImage = _carImageService.Get(ImageId).Data;
+            var carImage = _carImageService.Get(carImageId).Data;
 
             var result = _carImageService.Delete(carImage);
             if (result.Success)
@@ -47,9 +47,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile file, [FromForm(Name = ("ImageId"))] int ImageId)
+        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile file, [FromForm(Name = ("CarImageId"))] int CarImageId)
         {
-            var carImage = _carImageService.Get(ImageId).Data;
+            var carImage = _carImageService.Get(CarImageId).Data;
             var result = _carImageService.Update(file, carImage);
             if (result.Success)
             {
@@ -59,9 +59,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int imageId)
+        public IActionResult GetById(int carImageId)
         {
-            var result = _carImageService.Get(imageId);
+            var result = _carImageService.Get(carImageId);
             if (result.Success)
             {
                 return Ok(result);
@@ -81,9 +81,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getimagesbycarid")]
-        public IActionResult GetImagesById(int imageId)
+        public IActionResult GetImagesById(int carImageId)
         {
-            var result = _carImageService.GetImagesByCarId(imageId);
+            var result = _carImageService.GetImagesByCarId(carImageId);
             if (result.Success)
             {
                 return Ok(result);

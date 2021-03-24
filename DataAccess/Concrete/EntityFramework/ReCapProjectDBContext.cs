@@ -1,5 +1,5 @@
 ﻿using Core.Entities.Concrete;
-using Entitites.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,8 +7,9 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class ReCapProjectDBContext:DbContext
+    public class ReCapProjectDBContext : DbContext
     {
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=ReCapProjectDB;Trusted_Connection=true");

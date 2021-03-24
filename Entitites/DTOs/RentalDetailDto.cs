@@ -1,9 +1,9 @@
-﻿using Core.Entitites;
+﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entitites.DTOs
+namespace Entities.DTOs
 {
     public class RentalDetailDto : IDto
     {

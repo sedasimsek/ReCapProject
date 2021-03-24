@@ -1,12 +1,14 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using Entitites.Concrete;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -25,7 +27,8 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        //[SecuredOperation("carImages.add,admin")]
+        [CacheRemoveAspect("ICarImageService.Get")]
+        ////[SecuredOperation("carImages.add,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
@@ -40,6 +43,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [CacheRemoveAspect("ICarImageService.Get")]
         //[SecuredOperation("carImages.delete,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Delete(CarImage carImage)
@@ -49,6 +53,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [CacheRemoveAspect("ICarImageService.Get")]
         //[SecuredOperation("carImages.update,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
@@ -58,27 +63,25 @@ namespace Business.Concrete
             {
                 return result;
             }
-            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.ImageId == carImage.CarId).ImagePath, file);
+            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.CarImageId == carImage.CarId).ImagePath, file);
             carImage.Date = DateTime.Now;
             _carImageDal.Update(carImage);
             return new SuccessResult();
         }
 
-
-        [ValidationAspect(typeof(CarImageValidator))]
+        [CacheAspect]
         public IDataResult<CarImage> Get(int imageId)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.ImageId == imageId));
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.CarImageId == imageId));
         }
 
-
+        [CacheAspect]
         public IDataResult<List<CarImage>> GetAll()
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
 
-
-        [ValidationAspect(typeof(CarImageValidator))]
+        [CacheAspect]
         public IDataResult<List<CarImage>> GetImagesByCarId(int imageId)
         {
             IResult result = BusinessRules.Run(CheckIfCarImageNull(imageId));
