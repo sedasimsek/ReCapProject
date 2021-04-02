@@ -28,7 +28,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ICarImageService.Get")]
-        ////[SecuredOperation("carImages.add,admin")]
+        //[SecuredOperation("carImages.add,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
@@ -63,16 +63,19 @@ namespace Business.Concrete
             {
                 return result;
             }
-            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.CarImageId == carImage.CarId).ImagePath, file);
+            var oldPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\wwwroot")) + _carImageDal.Get(p => p.CarImageId == carImage.CarImageId).ImagePath;
+
+            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.CarImageId == carImage.CarImageId).ImagePath, file);
+            carImage.ImagePath = FileHelper.Update(oldPath, file);
             carImage.Date = DateTime.Now;
             _carImageDal.Update(carImage);
             return new SuccessResult();
         }
 
         [CacheAspect]
-        public IDataResult<CarImage> Get(int imageId)
+        public IDataResult<CarImage> Get(int carImageId)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.CarImageId == imageId));
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.CarImageId == carImageId));
         }
 
         [CacheAspect]
