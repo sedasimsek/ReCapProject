@@ -23,18 +23,49 @@ namespace DataAccess.Concrete.EntityFramework
                              join co in context.Colors
                              on ca.ColorId equals co.ColorId
 
-                             select new CarDetailDto
+                             select new CarDetailDto()
                              {
                                  CarId = ca.CarId,
                                  DailyPrice = ca.DailyPrice,
+                                 BrandId = b.BrandId,
                                  BrandName = b.BrandName,
                                  Description = ca.Description,
                                  ModelYear = ca.ModelYear,
+                                 ColorId = co.ColorId,
                                  ColorName = co.ColorName
                                  
                                  
                              };
                 return result.ToList(); 
+            }
+        }
+
+        public CarDetailDto GetCarDetails(int carId)
+        {
+            using (ReCapProjectDBContext context = new ReCapProjectDBContext())
+            {
+                var result = from car in context.Cars.Where(c => c.CarId == carId)
+
+                             join color in context.Colors
+                             on car.ColorId equals color.ColorId
+
+                             join brand in context.Brands
+                             on car.BrandId equals brand.BrandId
+
+                             select new CarDetailDto()
+                             {
+                                 CarId = car.CarId,
+                                 BrandId = brand.BrandId,
+                                 ColorId = color.ColorId,
+                                 BrandName = brand.BrandName,
+                                 ColorName = color.ColorName,
+                                 DailyPrice = car.DailyPrice,
+                                 Description = car.Description,
+                                 ModelYear = car.ModelYear,
+                                 MinFindexScore = car.MinFindexScore
+                             };
+
+                return result.SingleOrDefault();
             }
         }
     }
