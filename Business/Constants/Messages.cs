@@ -52,5 +52,6 @@ namespace Business.Constants
         public static string AuthorizationDenied = "Yetkiniz yok.";
         public static string LoginSuccess = "Successfully";
         public static string CardExist = "";
+        public static string NoCar { get; set; } = "NoCar!";
     }
 }

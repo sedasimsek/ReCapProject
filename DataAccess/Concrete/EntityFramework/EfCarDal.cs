@@ -13,13 +13,13 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, ReCapProjectDBContext>, ICarDal
     {
-        public List<CarDetailDto> GetCarDetails(Expression<Func<Car, bool>> filter = null)
+        public List<CarDetailDto> GetCarsDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
             using (ReCapProjectDBContext context = new ReCapProjectDBContext())
             {
                 var result = from ca in context.Cars
                              join b in context.Brands
-                             on ca.BrandId equals b.BrandId 
+                             on ca.BrandId equals b.BrandId
                              join co in context.Colors
                              on ca.ColorId equals co.ColorId
 
@@ -33,10 +33,10 @@ namespace DataAccess.Concrete.EntityFramework
                                  ModelYear = ca.ModelYear,
                                  ColorId = co.ColorId,
                                  ColorName = co.ColorName
-                                 
-                                 
+
+
                              };
-                return result.ToList(); 
+                return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
 
@@ -44,25 +44,25 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (ReCapProjectDBContext context = new ReCapProjectDBContext())
             {
-                var result = from car in context.Cars.Where(c => c.CarId == carId)
+                var result = from ca in context.Cars.Where(c => c.CarId == carId)
 
-                             join color in context.Colors
-                             on car.ColorId equals color.ColorId
+                             join c in context.Colors
+                             on ca.ColorId equals c.ColorId
 
-                             join brand in context.Brands
-                             on car.BrandId equals brand.BrandId
+                             join b in context.Brands
+                             on ca.BrandId equals b.BrandId
 
                              select new CarDetailDto()
                              {
-                                 CarId = car.CarId,
-                                 BrandId = brand.BrandId,
-                                 ColorId = color.ColorId,
-                                 BrandName = brand.BrandName,
-                                 ColorName = color.ColorName,
-                                 DailyPrice = car.DailyPrice,
-                                 Description = car.Description,
-                                 ModelYear = car.ModelYear,
-                                 MinFindexScore = car.MinFindexScore
+                                 CarId = ca.CarId,
+                                 BrandId = b.BrandId,
+                                 ColorId = c.ColorId,
+                                 BrandName = b.BrandName,
+                                 ColorName = c.ColorName,
+                                 DailyPrice = ca.DailyPrice,
+                                 Description = ca.Description,
+                                 ModelYear = ca.ModelYear,
+                                 MinFindexScore = ca.MinFindexScore
                              };
 
                 return result.SingleOrDefault();
