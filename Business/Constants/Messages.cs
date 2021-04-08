@@ -56,5 +56,8 @@ namespace Business.Constants
         public static string FindexDeleted = "Findex silindi";
         public static string FindexUpdated = "Findex güncellendi";
         public static string NoCar = "NoCar!";
+        public static string CreditCardDeleted = "Kredi kartı silindi.";
+        public static string CreditCardAdded = "Kredi kartı eklendi.";
+        public static string CreditCardUpdated = "Kredi kartı güncellendi";
     }
 }

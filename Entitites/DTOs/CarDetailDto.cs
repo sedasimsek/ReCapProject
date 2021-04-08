@@ -17,6 +17,7 @@ namespace Entities.DTOs
         public string ModelYear { get; set; }
         public string ImagePath { get; set; }
         public int? MinFindexScore { get; set; }
+        public bool RentalStatu { get; set; }
 
 
     }

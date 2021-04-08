@@ -8,6 +8,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -33,7 +34,7 @@ namespace Business.Concrete
                 return result;
             }
             _creditCardDal.Add(creditCard);
-            return new SuccessResult();
+            return new SuccessResult(Messages.CreditCardAdded);
         }
 
 
@@ -42,7 +43,7 @@ namespace Business.Concrete
         public IResult Delete(CreditCard creditCard)
         {
             _creditCardDal.Delete(creditCard);
-            return new SuccessResult();
+            return new SuccessResult(Messages.CreditCardDeleted);
         }
 
 
@@ -50,34 +51,36 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<CreditCard>> GetAll()
         {
-            return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll());
+            return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll().ToList());
         }
 
-
-        [SecuredOperation("admin,user")]
-        [CacheAspect]
-        public IDataResult<List<CreditCard>> GetByCustomer(int customerId)
+        public IDataResult<List<CreditCard>> GetAllByUserId(int userId)
         {
-            return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll(c => c.CustomerId == customerId));
+            return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll(p => p.UserId == userId));
         }
 
+        public IDataResult<CreditCard> GetById(int id)
+        {
+            return new SuccessDataResult<CreditCard>(_creditCardDal.Get(p => p.Id == id));
+        }
 
         [SecuredOperation("admin,user")]
         [CacheRemoveAspect("ICreditCardService.Get")]
         public IResult Update(CreditCard creditCard)
         {
             _creditCardDal.Update(creditCard);
-            return new SuccessResult();
+            return new SuccessResult(Messages.CreditCardUpdated);
         }
 
 
         private IResult IsCardExist(CreditCard creditCard)
         {
             var result = _creditCardDal.Get(c =>
-            c.NameOnTheCard == creditCard.NameOnTheCard
-            && c.CardNumber == creditCard.CardNumber
+            c.Name == creditCard.Name
+            && c.CreditCardNumber == creditCard.CreditCardNumber
             && c.CVV == creditCard.CVV
-            && c.ExpirationDate == creditCard.ExpirationDate);
+            && c.Month == creditCard.Month
+            && c.Year == creditCard.Year);
 
             if (result != null)
             {
