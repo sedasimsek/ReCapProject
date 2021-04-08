@@ -36,7 +36,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  UserName = u.FirstName + " " + u.LastName,
                                  BrandName = b.BrandName,
                                  RentDate = r.RentDate,
-                                 ReturnDate = r.ReturnDate
+                                 ReturnDate = (DateTime)r.ReturnDate
                              };
                 return result.ToList();
 
@@ -69,7 +69,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  UserName = u.FirstName + " " + u.LastName,
                                  CompanyName = cu.CompanyName,
                                  RentDate = r.RentDate,
-                                 ReturnDate = r.ReturnDate
+                                 ReturnDate = (DateTime)r.ReturnDate
                              };
 
                 return result.SingleOrDefault();

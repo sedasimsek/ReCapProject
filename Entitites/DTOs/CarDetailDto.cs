@@ -15,6 +15,7 @@ namespace Entities.DTOs
         public string BrandName { get; set; }         
         public string Description { get; set; }
         public string ModelYear { get; set; }
+        public string ImagePath { get; set; }
         public int? MinFindexScore { get; set; }
 
 

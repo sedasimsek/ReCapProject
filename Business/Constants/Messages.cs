@@ -52,6 +52,9 @@ namespace Business.Constants
         public static string AuthorizationDenied = "Yetkiniz yok.";
         public static string LoginSuccess = "Successfully";
         public static string CardExist = "";
-        public static string NoCar { get; set; } = "NoCar!";
+        public static string FindexAdded = "Findex eklendi";
+        public static string FindexDeleted = "Findex silindi";
+        public static string FindexUpdated = "Findex güncellendi";
+        public static string NoCar = "NoCar!";
     }
 }

@@ -24,5 +24,6 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<User> Users { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<Findex> Findexs { get; set; }
     }
 }
