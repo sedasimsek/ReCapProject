@@ -1,2 +1,2 @@
-# Rent A Car Platform
+# ReCap Rental Platform
 
