@@ -32,7 +32,9 @@ namespace DataAccess.Concrete.EntityFramework
                                  Description = ca.Description,
                                  ModelYear = ca.ModelYear,
                                  ColorId = co.ColorId,
-                                 ColorName = co.ColorName
+                                 ColorName = co.ColorName,
+                                 MinFindexScore = ca.MinFindexScore,
+                                 ImagePath = (from a in context.CarImages where a.CarId == ca.CarId select a.ImagePath).FirstOrDefault()
 
 
                              };
