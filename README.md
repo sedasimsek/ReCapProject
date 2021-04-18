@@ -1,3 +1,13 @@
 # ReCap Rental Platform
 
-SOLID, Kurumsal Yazılım Mimarisi, OOP, AOP(Caching,Performance,Transaction,Validation) ve Yazılım Geliştirme Prensipleri kullanılarak hazırlanmıştır. Web API ve Entity Framework yapısı kullanılmıştır.
+SOLID, Enterprise Software Architecture, OOP, AOP (Caching, Performance, Transaction, Validation) and Software Development Principles have been prepared. It also has a Web API and Entity Framework structure.
+
+- Result implementation for healthy checking HTTP Request status
+
+- On WebApi used wwwroot and you can easily upload your images to project(root)
+
+- Dependency Resolver: Autofac
+
+- Validation: Fluent Validation
+
+- Database Operations & Data Access Operations: Entity Framework Core
